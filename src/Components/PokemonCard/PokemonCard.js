@@ -1,28 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { P, H2, Img } from "./CardStyle";
+import { P, H2, DeleteButton } from "./CardStyle";
 import { Flex, Image, Button, Link } from "@chakra-ui/react";
 import { pokemonTypes } from "../../constants/types";
 import pokeBola from "../../Assets/pokebola.svg"
-import { NavLink } from "react-router-dom";
+import { Pokedex } from "../../pages/Pokedex/Pokedex";
+import { GlobalContext } from "../../contexts/GlobalContext";
+import { useNavigate } from "react-router";
+import { goToDetailsPage } from "../../Router/coordinator";
+import { BASE_URL } from "../../constants/apiUrl";
 
-export const PokemonCard = ({pokemonName}) => {
+export const PokemonCard = (props) => {
+
+    const {pokemonName, inPokedex, removeFromPokedex} = props
+
+    const navigate = useNavigate()
+
+    const context = useContext(GlobalContext)
+    const {addToPokedex} = context
 
     const [pokemons, setPokemons] = useState([])
     const [pokemonsImage, setPokemonsImage] = useState('')
     const [typeLocal, setTypeLocal] = useState([])
 
     const fetchPokemonName = async () => {
-        await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
-        .then((result) => {
-            setPokemons(result.data)
-            setPokemonsImage(result.data.sprites.other['official-artwork']['front_default'])
-            setTypeLocal([pokemonTypes[result.data.types[0].type.name], pokemonTypes[result.data.types[1]?.type.name]])
-            console.log(result.data)
-            
-        })
-        .catch((error) => console.log(error))
+        try{
+           const response = await axios.get(`${BASE_URL}/${pokemonName}`)
+           setPokemons(response.data)
+           setPokemonsImage(response.data.sprites.other['official-artwork']['front_default'])
+           setTypeLocal([pokemonTypes[response.data.types[0].type.name], pokemonTypes[response.data.types[1]?.type.name]])
+        } catch (error){
+            console.log("Erro ao buscar lista de pokemons");
+            console.log(error);
+        }
     }
+   
+    
 
     useEffect(() => {
         fetchPokemonName();
@@ -76,15 +89,27 @@ export const PokemonCard = ({pokemonName}) => {
                         fontFamily={"Poppins" || "sans-serif"}
                         color={"white"}
                         textDecoration={"underline"}
-                     >Detalhes</Link>
-                     <Button 
+                        onClick={() => goToDetailsPage(navigate, pokemonName)}
+                        >Detalhes</Link>
+
+                     {inPokedex ? <DeleteButton
+                        onClick={() => removeFromPokedex(pokemons)}
+                     >Excluir!</DeleteButton> 
+                     
+                     : 
+
+                     <Button
+                        fontFamily={"Inter, sans-serif"}
                         position={"absolute"}
                         bottom={"20px"}
                         right={"32px"}
                         w={"146px"}
                         h={"38px"}
                         borderRadius={"8px"}
-                     >Capturar!</Button>
+                        onClick={() => addToPokedex(pokemons)}
+                        >Capturar!</Button>
+                     }
+                     
                 </Flex>
         </>
     )

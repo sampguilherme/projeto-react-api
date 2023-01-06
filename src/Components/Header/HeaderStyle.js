@@ -38,6 +38,7 @@ export const P = styled.p`
 export const A = styled.a`
     display: flex;
     font-family: 'Poppins';
+    font-size: 12px;
 `
 
 export const Img = styled.img`
@@ -62,7 +63,7 @@ export const DeleteButton = styled.button`
     border: 0;
     color: white;
     border-radius: 8px;
-    width: 12vw;
+    width: 155px;
     height: 5vh;
     padding: 4px 10px 4px 10px;
     font-size: 14px;

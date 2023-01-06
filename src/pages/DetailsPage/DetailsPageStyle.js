@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Div = styled.div`
+export const DivPrincipal = styled.div`
     background-color: #5E5E5E;
     height: 100vh;
 `

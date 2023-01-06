@@ -1,15 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router";
-import { Div, H2 } from "./DetailsPageStyle";
-import { goToHomePage } from "../../Router/coordinator";
+import { DivPrincipal, H2 } from "./DetailsPageStyle";
 import { Header } from "../../Components/Header/Header";
+import { Box, Flex } from "@chakra-ui/layout";
+import pokeBola from "../../Assets/pokebola.svg"
+import { GlobalContext } from "../../contexts/GlobalContext";
 
 export const DetailsPage = () => {
     const navigate = useNavigate()
+    const context = useContext(GlobalContext)
+    const {pokemons} = context
+
+    
+
     return (
-        <Div>
+        <DivPrincipal>
             <Header isOnDetailsPage={true}/>
-            <H2>Datalhes</H2>
-        </Div>
+            <Flex
+                position={"relative"}
+                bgImage={pokeBola}
+            >
+                <Box>
+
+                </Box>
+            </Flex>
+        </DivPrincipal>
     )
 }
