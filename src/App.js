@@ -2,6 +2,7 @@ import React from "react";
 import { createGlobalStyle } from "styled-components"
 import { Router } from "./Router/Router";
 import axios from "axios";
+import { ChakraProvider } from '@chakra-ui/react'
 
 const GlobalStyle = createGlobalStyle`
 * {
@@ -13,18 +14,13 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
 
-    let pokemons = []
-
-         axios.get(`https://pokeapi.co/api/v2/pokemon?limit=20&offset=0`)
-        .then((response) => pokemons = response)
-
-        console.log(pokemons)
+    
 
   return (
-    <>
+    <ChakraProvider>
       <GlobalStyle/>
       <Router/>
-    </>
+    </ChakraProvider>
   );
 }
 
