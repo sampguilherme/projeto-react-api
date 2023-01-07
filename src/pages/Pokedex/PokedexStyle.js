@@ -12,4 +12,5 @@ export const H2 = styled.h2`
     padding-top: 34px;
     font-family: 'Poppins', sans-serif;
     font-weight: normal;
+    font-size: 24px;
 `
