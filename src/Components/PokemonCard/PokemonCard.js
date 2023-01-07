@@ -94,7 +94,7 @@ export const PokemonCard = (props) => {
 
                      {inPokedex ? <DeleteButton
                         onClick={() => removeFromPokedex(pokemons)}
-                     >Excluir!</DeleteButton> 
+                     >Exclir!</DeleteButton> 
                      
                      : 
 

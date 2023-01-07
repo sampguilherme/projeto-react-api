@@ -2,14 +2,20 @@ import React from "react";
 import Logo from "../../Assets/logo.svg"
 import { Img, HeaderStyled, Div1, Div2, Div3, ButtonFromPokedex, DeleteButton, P, A } from "./HeaderStyle";
 import { goToPokedex, goToHomePage } from "../../Router/coordinator";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 
 export const Header = (props) => {
+
+    const location = useLocation()
+    const params = useParams()
+
     const {
             isOnDetailsPage,
             isOnHomePage,
             isOnPokedexPage
           } = props
+
+
     const navigate = useNavigate()
     return(
         <HeaderStyled>
