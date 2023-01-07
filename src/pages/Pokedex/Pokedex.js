@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { goToDetailsPage } from "../../Router/coordinator";
 import { useNavigate } from "react-router";
 import { H2, Div } from "./PokedexStyle";
 import { Header } from "../../Components/Header/Header";

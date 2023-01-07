@@ -4,7 +4,6 @@ import { P, H2, DeleteButton } from "./CardStyle";
 import { Flex, Image, Button, Link } from "@chakra-ui/react";
 import { pokemonTypes } from "../../constants/types";
 import pokeBola from "../../Assets/pokebola.svg"
-import { Pokedex } from "../../pages/Pokedex/Pokedex";
 import { GlobalContext } from "../../contexts/GlobalContext";
 import { useNavigate } from "react-router";
 import { goToDetailsPage } from "../../Router/coordinator";

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Div, H2 } from "./HomeStyle";
 import { Header } from "../../Components/Header/Header";
 import { PokemonCard } from "../../Components/PokemonCard/PokemonCard";
@@ -8,8 +8,9 @@ import { GlobalContext } from "../../contexts/GlobalContext";
 export const Home = () => {
     
     const context = useContext(GlobalContext)
-    const {basePokemons, setBasePokemons} = context
+    const {basePokemons, setBasePokemons, pokemons, pokedex} = context
 
+    const pokedexStringfy = JSON.stringify(pokedex)
 
     return (
         <Div>
@@ -29,7 +30,9 @@ export const Home = () => {
                     w={"1440px"}
                     gap={"20px"}
                 >
+                    
                     {basePokemons.map((pokemon, key) => (
+                        pokedexStringfy.includes(`"${pokemon.name}"`) ? <></> :
                             <PokemonCard
                                 pokemonName={pokemon.name}
                                 key={key}

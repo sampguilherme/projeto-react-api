@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Logo from "../../Assets/logo.svg"
-import { Img, HeaderStyled, Div1, Div2, Div3, ButtonFromPokedex, DeleteButton, P, A } from "./HeaderStyle";
+import { Img, HeaderStyled, Div1, Div2, Div3, ButtonHeader, DeleteButton, P, A } from "./HeaderStyle";
 import { goToPokedex, goToHomePage } from "../../Router/coordinator";
 import { useLocation, useNavigate, useParams } from "react-router";
+import { GlobalContext } from "../../contexts/GlobalContext";
 
 export const Header = (props) => {
 
     const location = useLocation()
     const params = useParams()
+
+    const {pokedex, addToPokedex, pokemons, removeFromPokedex} = useContext(GlobalContext)
+
+    const pokedexStringfy = JSON.stringify(pokedex)
 
     const {
             isOnDetailsPage,
@@ -15,6 +20,23 @@ export const Header = (props) => {
             isOnPokedexPage
           } = props
 
+        const headerButtons = () =>{
+            switch(location.pathname){
+                case `/pokemon/${params.pokemonName}`:
+                    return (
+                        <>
+                            {pokedexStringfy.includes(`"${params.pokemonName}"`) ?
+                                <DeleteButton onClick={() => removeFromPokedex(pokemons)}>Excluir da Pokedex</DeleteButton> :
+                                <ButtonHeader onClick={() => addToPokedex(pokemons)}>Capturar!</ButtonHeader>
+                            }
+                        </>
+                    )
+            }
+        }
+
+        
+        
+        
 
     const navigate = useNavigate()
     return(
@@ -37,11 +59,11 @@ export const Header = (props) => {
             <Div3>
                 {
                     isOnHomePage 
-                    && <ButtonFromPokedex onClick={() => goToPokedex(navigate)}>Pokédex</ButtonFromPokedex>
+                    && <ButtonHeader onClick={() => goToPokedex(navigate)}>Pokédex</ButtonHeader>
                 }
                 {
                     isOnDetailsPage
-                    && <DeleteButton>Excluir da Pokedex</DeleteButton>
+                    && headerButtons()
                 }
             </Div3>
         </HeaderStyled>
