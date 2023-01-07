@@ -45,7 +45,7 @@ export const Img = styled.img`
     width: 14vw;
 `
 
-export const ButtonFromPokedex = styled.button`
+export const ButtonHeader = styled.button`
     background-color: #33A4F5;
     border: 0;
     color: white;
