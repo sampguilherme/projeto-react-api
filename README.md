@@ -1,10 +1,10 @@
 # Pokedex
 
 ## Deploy:
-https://guilherme-sampaio.surge.sh/
+https://pokedex-tan-eight.vercel.app/
 
 ## API usada:
-pokeapi.co/
+https://pokeapi.co/
 
 ## Sobre
 Site com uma lista de pokemons onde o usuário pode colocar em sua pokedex e também
