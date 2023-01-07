@@ -10,19 +10,25 @@ import { useNavigate } from "react-router";
 import { goToDetailsPage } from "../../Router/coordinator";
 import { BASE_URL } from "../../constants/apiUrl";
 
+
 export const PokemonCard = (props) => {
 
     const {pokemonName, inPokedex, removeFromPokedex} = props
 
     const navigate = useNavigate()
-
-    const context = useContext(GlobalContext)
-    const {addToPokedex} = context
-
     const [pokemons, setPokemons] = useState([])
     const [pokemonsImage, setPokemonsImage] = useState('')
     const [typeLocal, setTypeLocal] = useState([])
 
+    const context = useContext(GlobalContext)
+    const {
+        addToPokedex
+    } = context
+
+    useEffect(() => {
+        fetchPokemonName()
+    }, [])
+    
     const fetchPokemonName = async () => {
         try{
            const response = await axios.get(`${BASE_URL}/${pokemonName}`)
@@ -34,13 +40,7 @@ export const PokemonCard = (props) => {
             console.log(error);
         }
     }
-   
     
-
-    useEffect(() => {
-        fetchPokemonName();
-    }, []);
-
     
 
     return (

@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const Div = styled.div`
     background-color: #5E5E5E;
-    height: 100vh;
+    min-height: 100vh;
+    padding-bottom: 40px;
 `
 
 export const H2 = styled.h2`
