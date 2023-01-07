@@ -6,6 +6,7 @@ import { GlobalContext } from "./contexts/GlobalContext";
 import { useState, useEffect } from "react";
 import { BASE_URL } from "./constants/apiUrl";
 import axios from "axios";
+import { pokemonTypes } from "./constants/types";
 
 
 const GlobalStyle = createGlobalStyle`
@@ -18,13 +19,29 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
 
-  const [pokemons, setPokemons] = useState([])
+  const [basePokemons, setBasePokemons] = useState([])
   const [pokedex, setPokedex] = useState([])
-  const [pokelist, setPokelist] = useState([])
+  const [pokelist, setPokeList] = useState([])
+
+  const [pokemons, setPokemons] = useState([])
+  const [pokemonsImage, setPokemonsImage] = useState('')
+  const [typeLocal, setTypeLocal] = useState([])
+
+  const fetchPokemonName = async (pokemonName) => {
+    try{
+       const response = await axios.get(`${BASE_URL}/${pokemonName}`)
+       setPokemons(response.data)
+       setPokemonsImage(response.data.sprites.other['official-artwork']['front_default'])
+       setTypeLocal([pokemonTypes[response.data.types[0].type.name], pokemonTypes[response.data.types[1]?.type.name]])
+    } catch (error){
+        console.log("Erro ao buscar lista de pokemons");
+        console.log(error);
+    }
+}
 
   const getPokemons = async () => {
     await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=21&offset=0`)
-    .then((response) => setPokemons(response.data.results))
+    .then((response) => setBasePokemons(response.data.results))
     .catch((error) => console.log(error))
 }
 
@@ -54,11 +71,17 @@ useEffect(() => {
 
   let context = {
     pokemons,
-    setPokemons,
+    pokemonsImage,
+    typeLocal,
+    basePokemons,
+    setBasePokemons,
     addToPokedex,
     pokelist,
+    setPokeList,
     pokedex,
-    removeFromPokedex
+    removeFromPokedex,
+    getPokemons,
+    fetchPokemonName
   }
 
     
