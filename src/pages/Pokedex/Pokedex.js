@@ -4,7 +4,8 @@ import { H2, Div } from "./PokedexStyle";
 import { Header } from "../../Components/Header/Header";
 import { GlobalContext } from "../../contexts/GlobalContext";
 import { PokemonCard } from "../../Components/PokemonCard/PokemonCard";
-import { Flex } from "@chakra-ui/layout";
+import { Flex, Text } from "@chakra-ui/layout";
+
 
 export const Pokedex = () => {
     const navigate = useNavigate()
@@ -12,6 +13,8 @@ export const Pokedex = () => {
     const context = useContext(GlobalContext)
     const {pokedex, removeFromPokedex} = context
 
+    console.log(pokedex.length)
+    
     return (
         <Div>
             <Header isOnPokedexPage={true}/>
@@ -20,7 +23,16 @@ export const Pokedex = () => {
                 
                 justifyContent={"center"}
             >
-                <Flex
+                {pokedex.length < 1 ? 
+                    <Text 
+                        marginTop={"30px"}
+                        textAlign={"center"}
+                        color={"white"}
+                        fontFamily={"Inter, sans-serif"}
+                        fontSize={"32px"}
+                    >Que pena... Você ainda não capturou nenhum Pokemon!</Text> : 
+
+                    <Flex
                     flexWrap={"wrap"}
                     gap={"20px"}
                     justifyContent={"center"}
@@ -35,7 +47,8 @@ export const Pokedex = () => {
                             key={pokemon.name}
                         />
                     ))}
-                </Flex>
+                </Flex>}
+                
             </Flex>
         </Div>
     )
