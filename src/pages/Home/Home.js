@@ -8,9 +8,14 @@ import { GlobalContext } from "../../contexts/GlobalContext";
 export const Home = () => {
     
     const context = useContext(GlobalContext)
-    const {basePokemons, setBasePokemons, pokemons, pokedex} = context
+    const {basePokemons, pokedex} = context
 
-    const pokedexStringfy = JSON.stringify(pokedex)
+    let pokedexStringfy = ""
+
+    pokedex.map((pokemon) => {
+        const newPokedexStringify = pokemon.name
+        pokedexStringfy = [...pokedexStringfy, JSON.stringify(newPokedexStringify)]
+    })
 
     return (
         <Div>

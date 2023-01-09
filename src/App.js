@@ -21,7 +21,6 @@ function App() {
 
   const [basePokemons, setBasePokemons] = useState([])
   const [pokedex, setPokedex] = useState([])
-  const [pokelist, setPokeList] = useState([])
 
   const [pokemons, setPokemons] = useState([])
   const [pokemonsImage, setPokemonsImage] = useState('')
@@ -40,7 +39,7 @@ function App() {
 }
 
   const getPokemons = async () => {
-    await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=21&offset=0`)
+    await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=151&offset=0`)
     .then((response) => setBasePokemons(response.data.results))
     .catch((error) => console.log(error))
 }
@@ -76,8 +75,6 @@ useEffect(() => {
     basePokemons,
     setBasePokemons,
     addToPokedex,
-    pokelist,
-    setPokeList,
     pokedex,
     removeFromPokedex,
     getPokemons,
