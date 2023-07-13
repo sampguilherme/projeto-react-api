@@ -1,5 +1,38 @@
 import styled from "styled-components";
 
+export const PrincipalDiv = styled.div`
+    
+        @media (max-width: 468px){
+            
+            
+            .cardPokemon {
+                width: 320px;
+                height: 160px;
+                background-size: 200px;
+            }
+
+            .pokemonName{
+                font-size: 16px;
+            }
+
+            .pokemonImage{
+                width: 153px;
+                height: 153px;
+                right: 10px;
+                bottom: 60px;
+            }
+
+            .pokemonType{
+                left: 18px;
+                top: 54px;
+                width: 69px;
+                height: 31px;
+            }
+
+        }
+    
+`
+
 export const P = styled.p`
     position: absolute;
     left: 23px;
@@ -39,4 +72,14 @@ export const DeleteButton = styled.button`
     &:hover{
         background-color: #F58787;
     }
+`
+
+export const Button = styled.button `
+    font-family: Inter, sans-serif;
+    position: absolute;
+    bottom: 20px;
+    right: 32px;
+    width: 146px;
+    height: 38px;
+    border-radius: 8px;
 `

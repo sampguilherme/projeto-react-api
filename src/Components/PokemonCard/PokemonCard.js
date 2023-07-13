@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { P, H2, DeleteButton } from "./CardStyle";
+import { P, H2, DeleteButton, PrincipalDiv } from "./CardStyle";
 import { Flex, Image, Button, Link } from "@chakra-ui/react";
 import { pokemonTypes } from "../../constants/types";
 import pokeBola from "../../Assets/pokebola.svg"
@@ -43,9 +43,10 @@ export const PokemonCard = (props) => {
     
 
     return (
-        <>
+        <PrincipalDiv>
                     
-                <Flex 
+                <Flex
+                    className="cardPokemon"
                     position={"relative"}
                     bgImage={pokeBola}
                     bgRepeat={"no-repeat"}
@@ -58,10 +59,11 @@ export const PokemonCard = (props) => {
                     
                 >
                     <P>#{ pokemons.id < 10 ? `0${pokemons.id}` : pokemons.id}</P>
-                    <H2>{pokemonName}</H2>
-                    <Flex paddingTop={"8px"} gap={"16px"}>
+                    <H2 className="pokemonName">{pokemonName}</H2>
+                    <Flex paddingTop={"8px"} gap={"8px"}>
                         {pokemons.types?.map((type) => {
-                            return <Image 
+                            return <Image
+                                    className="pokemonType"
                                     position={'relative'}
                                     left={"18px"}
                                     top={"84px"}
@@ -73,6 +75,7 @@ export const PokemonCard = (props) => {
                         })}
                     </Flex>
                     <Image
+                        className="pokemonImage"
                         position={"absolute"}
                         w={"193px"}
                         h={"193px"}
@@ -110,6 +113,6 @@ export const PokemonCard = (props) => {
                      }
                      
                 </Flex>
-        </>
+        </PrincipalDiv>
     )
 }
